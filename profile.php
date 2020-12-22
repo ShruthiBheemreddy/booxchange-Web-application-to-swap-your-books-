@@ -65,8 +65,8 @@ if( $conn->connect_errno){
 			</div>
 		</nav>
 		<ul class="unordered" style="float: left;">
-  <li class="vertical"><a href="#dashboard">Dashboard</a></li>
-  <li class="vertical"><a href="#news">Orders</a></li>
+  <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
+  <li class="vertical"><a href="order.php">Orders</a></li>
   <li class="vertical"><a href="Your_Library.php">Your_Library</a></li>
   <b style="color: navy;text-align: center;display: block; width:75%;
 height:auto;
@@ -74,16 +74,15 @@ max-height:100%;
 overflow:hidden;
 margin-left:14.5%;
 margin-right:14.5%"></b>
-  <li class="vertical"><a href="#about">Wallet</a></li>
+  <li class="vertical"><a href="wallet.php">Wallet</a></li>
   <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
   <li class="vertical"><a href="shop.php">Shop</a></li>
-  <li class="vertical"><a href="#about">Profile</a></li>
-  <li class="vertical"><a href="#about">Logout</a></li>
+  <li class="vertical"><a href="profile.php">Profile</a></li>
+  <li class="vertical"><a href="account.php">Logout</a></li>
 </ul>
 <p style="width: 90.2%;
-    margin-left: 20%;
     border-top: 0;">
-    	<form style="margin:0 auto;width:20%;text-align:left" action="profile.php" method="post">
+    	<form style="width:20%;text-align:center; margin-left:25%;" action="profile.php" method="post">
   <b style="color: black;">Fill your personal details</b>
   <input type="text" name="name"  placeholder="Name"  maxlength="100" size="100" required style="background-color: powderblue;
   color: black; "><br>

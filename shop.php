@@ -12,11 +12,12 @@ if( $mysqli->connect_errno){
 if(isset($_POST['add_to_cart'])){
 		$cart =$_GET['name_of_book'];
 		$_SESSION["name_of_book"]=$cart;
+		$query="SELECT price from searchbook where name_of_book='".$cart."'";
+		$result=mysqli_query($mysqli,$query);
+		$row=$result->fetch_assoc();
+		$_SESSION["price"]=$row['price'];
+		$_SESSION["user"]=$_GET['user'];
 		include "add_to_cart.php";
-
-
-
-
 }
 ?>
 <!DOCTYPE HTML>
@@ -74,41 +75,40 @@ if(isset($_POST['add_to_cart'])){
 			</div>
 		</nav>
 		<ul class="unordered" style="float: left;">
-  <li class="vertical"><a href="#dashboard">Dashboard</a></li>
-  <li class="vertical"><a href="#news">Orders</a></li>
-  <li class="vertical"><a href="Your_Library.php">Your_Library</a></li>
-  <b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%"></b>
-  <li class="vertical"><a href="#about">Wallet</a></li>
+  <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
+  <li class="vertical"><a href="orders.php">Orders</a></li>
+  <li class="vertical"><a href="your_Library.php">Your_Library</a></li>
+  <li class="vertical"><a href="Wallet.php">Wallet</a></li>
   <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
   <li class="vertical"><a href="shop.php">Shop</a></li>
   <li class="vertical"><a href="profile.php">Profile</a></li>
-  <li class="vertical"><a href="login.php">Logout</a></li>
+  <li class="vertical"><a href="account.php">Logout</a></li>
 </ul>
 <p style="width: 90.2%;
     margin-left: 20%;
     border-top: 0;"><?php
 $query="select * from searchbook";
     if($result=$mysqli->query($query)){
+    	?>
+    	<table style="margin-left: 20%; background-color: white; border: 2px solid black; padding: 50px solid black; width: 60%;color: cyan;">
+            <tr >
+                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%; margin-left:10%;">Name of the Book</th>
+                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;margin-left: 10%;">Price</th> 
+                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;">User</th>
+                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;"></th>
+            </tr>
+        </table>
+    	<?php
         while($row=$result->fetch_assoc()){
     	?>
-    	<form method="post" action="shop.php?action=add&name_of_book=<?php echo $row['name_of_book'];?>">
-    		<div style="margin-left: auto; margin-right: auto; color: cyan; border: 2px solid black; padding: 50px solid black; width: 80%">
-    			<table>
+    	<form method="post" action="shop.php?action=add&name_of_book=<?php echo $row['name_of_book'];?>&user=<?php echo $row['username']?>">
+    			<table style="margin-left: 20%; border: 2px solid black; padding: 50px solid black; width: 60%;color: white;">
 
-                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['name_of_book']; ?></td>
-    				<td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['author_of_book']; ?></td>
-                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['Publisher_of_book']; ?></td>
-                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 10%"><?php echo $row['Language']; ?></td>
-                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 10%"><?php echo $row['Pages']; ?></td>
-                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 10%"><?php echo $row['genre']; ?></td>
-                <td><input  type="submit" name="add_to_cart" value="Add to cart" ></td>
+                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;"><?php echo $row['name_of_book']; ?></td>
+                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;"><?php echo $row['price']; ?></td>
+               <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;"><?php echo $row['username']; ?></td>
+                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%;"><input  type="submit" name="add_to_cart" value="Add to cart" style="color: blue;" ></td>
     			</table>
-    		</div>
     	</form>
         <?php
     }
@@ -120,6 +120,7 @@ $query="select * from searchbook";
   width: 150px;
   color: cyan;
   padding: 5px 16px;
+
   background-color:black;
 }
 .vertical a{

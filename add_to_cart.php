@@ -10,6 +10,8 @@ if( $conn->connect_errno){
 }
 $email=$_SESSION["username"];
 $book=$_SESSION["name_of_book"];
-$query="INSERT INTO cart(email,books) values('$email','$book')";
+$price=$_SESSION["price"];
+$user=$_SESSION["user"];
+$query="INSERT INTO cart(email,books,price,user) values('$email','$book','$price','$user')";
 mysqli_query($conn, $query);
 ?>

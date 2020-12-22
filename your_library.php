@@ -1,4 +1,3 @@
-<?php?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -8,7 +7,12 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/style.css">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script> 
 	</head>
 	<body>
 		
@@ -36,11 +40,11 @@
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li ><a href="index.php">Home</a></li>
-								<li class="active">
+								<li>
 									<a href="about1.html">About</a>
 								</li>
 								<li><a href="library.php">Library</a></li>
-								<li><a href="account.php">Account</a></li>
+								<li class="active"><a href="account.php">Account</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</div>
@@ -48,43 +52,30 @@
 				</div>
 			</div>
 		</nav>
-		<ul class="unordered">
-  <li class="vertical"><a href="#dashboard">Dashboard</a></li>
-  <li class="vertical"><a href="#news">Orders</a></li>
-  <li class="vertical"><a href="your_library.php">Your_Library</a></li>
-  <b style="color: navy;width: 90.2%;
-    margin-left: 20%;
-    border-top: 0;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%"> <a href="addbook.php" ><b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%">ADD YOUR BOOKS</b></a><br>
-<a href="display_your_books.php"><b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%">DISPLAY YOUR BOOKS</b></a>
-<br>
-<a href="delete_your_book.php"><b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%">DELETE YOUR BOOKS</b></a>
-</b>
-  <li class="vertical"><a href="#about">Wallet</a></li>
+		<ul class="unordered" style="float: left;">
+  <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
+  <li class="vertical"><a href="order.php">Orders</a></li>
+  <li class="vertical"><a href="your_Library.php">Your_Library</a></li>
+  <li class="vertical"><a href="wallet.php">Wallet</a></li>
   <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
   <li class="vertical"><a href="shop.php">Shop</a></li>
-  <li class="vertical"><a href="#about">Profile</a></li>
-  <li class="vertical"><a href="#about">Logout</a></li>
+  <li class="vertical"><a href="profile.php">Profile</a></li>
+  <li class="vertical"><a href="account.php">Logout</a></li>
 </ul>
+<p style="width: 90.2%;
+    margin-left: 30%;
+    border-top: 10%;
+    margin-top:5% ;color: navy;"
+    	<a 
+    	<br>
+    	<a href="addbook.php" ><b style="color: navy;">ADD YOUR BOOKS</b></a><br>
+    	<br>
+<a href="display_your_books.php"><b style="color: navy;">DISPLAY YOUR BOOKS</b></a>
+<br>
+<br>
+<a href="delete_your_book.php"><b style="color: navy;">DELETE YOUR BOOKS</b></a>
+</b
+    </p>
 <style type="text/css">
 .vertical{
   display: block;
@@ -99,7 +90,9 @@ margin-right:14.5%">DELETE YOUR BOOKS</b></a>
 .vertical:hover {
   color: red;
 }
-	</style>
+
+</style>
+</script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
    <!-- popper -->

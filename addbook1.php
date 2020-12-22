@@ -12,7 +12,10 @@ $Language=$_POST['Language'];
 $Pages=$_POST['Pages'];
 $genre=$_POST['genre'];
 $email=$_SESSION["username"];
-$query = "INSERT INTO searchbook (username,name_of_book,author_of_book,Publisher_of_book,Language,Pages,genre) VALUES('$email','$name_of_book','$author_of_book','$Publisher_of_book','$Language','$Pages','$genre')";
+$price=$_POST["price"];
+$query = "INSERT INTO searchbook (username,name_of_book,author_of_book,Publisher_of_book,Language,Pages,genre,price) VALUES('$email','$name_of_book','$author_of_book','$Publisher_of_book','$Language','$Pages','$genre','$price')";
 $result=mysqli_query($db, $query) or die("cannot insert");
+$query2="INSERT INTO book_price (name,price) values('$name_of_book','$price')";
+$result1=mysqli_query($db, $query2) or die("cannot insert");
 header('location: your_library.php');
 ?>

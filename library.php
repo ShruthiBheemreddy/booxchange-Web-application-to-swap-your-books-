@@ -61,8 +61,8 @@ if( $mysqli->connect_errno){
 $query="select * from searchbook";
     if($result=$mysqli->query($query)){
     	?>
-        <h3 style="margin-left: 50px; margin-right: 50px;">Some of the books available in our library are</h2>
-        <table style="margin-left: auto; margin-right: auto; background-color: white; border: 2px solid black; padding: 50px solid black; width: 80%;">
+        <h3 style="margin-left: 30%; margin-top: 2%;">Some of the books available in our library are</h2>
+        <table style="margin-left: auto; margin-right: auto; background-color: white; border: 2px solid black; padding: 50px solid black; width: 80%;color: white;">
             <tr >
                 <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Name of the Book</th>
                 <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Author of Book</th>

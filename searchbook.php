@@ -94,8 +94,8 @@ else{
 
     </body>
 </html>
-        <h2 style="margin-left: auto; margin-right: auto; width: 75%; color: green;">Book of your choice is found successfully</h2>
-        <h5 style="margin-left: auto; margin-right: auto; width: 75%; color: green;">Here are the details of the book</h5>
+        <h2 style="margin-left: 30%; margin-right: ; width: 75%; color: green;">Book of your choice is found successfully</h2>
+        <h5 style="margin-left: 30%; margin-top: 2%; width: 75%; color: green;">Here are the details of the book</h5>
         <table style="margin-left: auto; margin-right: auto; color: cyan; border: 2px solid black; padding: 1px solid black;">
             <tr >
                 <th style="border: 1px solid black; padding: 5px; background-color: black;">Name of the Book</th>
@@ -197,7 +197,7 @@ else{
     </body>
 </html>
 
-        <h3 style="color: red; width: 100%; margin: auto;">"sorry, Book of your choice is not available right now, Goback to previous page!!"</h3>
+        <h3 style="color: red; width: 100%; margin: auto; margin-left: 10%">"sorry, Book of your choice is not available right now, Goback to previous page!!"</h3>
         <?php
     }
 

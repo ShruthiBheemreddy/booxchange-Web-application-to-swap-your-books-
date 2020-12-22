@@ -9,6 +9,17 @@ if( $conn->connect_errno){
     echo "cannot connect to database";
     exit();
 }
+if(isset($_POST['remove_from_cart'])){
+	$cart =$_GET['name_of_book'];
+	$email=$_SESSION["username"];
+	$_SESSION["total"]="0";
+$query="delete from cart where email='".$email."' and books='".$cart."' limit 1";
+mysqli_query($conn, $query);
+$sql="select sum(price) as total from cart where email='".$email."'";
+$result=mysqli_query($conn, $sql);
+$row=mysqli_fetch_assoc($result);
+//$_SESSION["total"]=$row['total'];
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -65,20 +76,14 @@ if( $conn->connect_errno){
 			</div>
 		</nav>
 		<ul class="unordered" style="float: left;">
-  <li class="vertical"><a href="#dashboard">Dashboard</a></li>
-  <li class="vertical"><a href="#news">Orders</a></li>
-  <li class="vertical"><a href="Your_Library.php">Your_Library</a></li>
-  <b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%"></b>
-  <li class="vertical"><a href="#about">Wallet</a></li>
-  <li class="vertical"><a href="#about">Your_cart</a></li>
+  <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
+  <li class="vertical"><a href="order.php">Orders</a></li>
+  <li class="vertical"><a href="your_Library.php">Your_Library</a></li>
+  <li class="vertical"><a href="wallet.php">Wallet</a></li>
+  <li class="vertical"><a href="your_library.php">Your_cart</a></li>
   <li class="vertical"><a href="shop.php">Shop</a></li>
-  <li class="vertical"><a href="#about">Profile</a></li>
-  <li class="vertical"><a href="#about">Logout</a></li>
+  <li class="vertical"><a href="profile.php">Profile</a></li>
+  <li class="vertical"><a href="index.php">Logout</a></li>
 </ul>
 <p style="width: 90.2%;
     margin-left: 20%;
@@ -87,20 +92,28 @@ margin-right:14.5%"></b>
     	<?php
     	$user=$_SESSION["username"];
     	$query = "SELECT * FROM cart WHERE email = '".$user."'";
+
 		if($result=$conn->query($query)){
+			$_SESSION["total"]="0";
         while($row=$result->fetch_assoc()){
     	?>
-    	<form method="post" action="your_cart.php?action=add&name_of_book=<?php echo $row['books'];?>" >
-                <div style="color: blue; margin-left: 30%"><?php echo $row['books'];?>
-                <input style="margin-left: 10%; color:red; background-color: black;"type="submit" name="remove_from_cart" value="REMOVE" >
-    		</div>
+    	<form method="post" action="your_cart.php?action=add&name_of_book=<?php echo $row['books'];?>"  >
+    			<table style="margin-left: 20%; border: 2px solid black; padding: 50px solid black; width: 50%;color: white;">
+
+                <td style="border: 1px solid black; padding: 5px; width: 20%;"><div style="color: blue; margin-left: 30%"><?php echo $row['books'];?></td>
+                <td style="border: 1px solid black; padding: 5px; width: 20%;"><input style="margin-left: 10%; color:red; background-color: black;"type="submit" name="remove_from_cart" value="REMOVE" >
+           	<?php $_SESSION["total"]=(int)$_SESSION["total"]+(int)$row['price'];?>
+    		</div></td>
+             
+    			</table>
     	</form>
 
         <?php
     }
-    ?>
-    <form method="order.php">
-            	<input style="margin-left: 20%; margin-top: 5%; color:cyan;background-color: black;" type="submit" name="order" value="PROCEED TO PAY---->" >
+       ?>
+    <form method="post" action="checkout.php">
+    		<b style="margin-left: 20%"> A total of :<?php echo $_SESSION["total"];?>  INR</b>
+            	<input style="margin-left: 2%; margin-top: 5%; color:cyan;background-color: black;" type="submit" name="order" value="PROCEED TO PAY---->" >
             </form>
     <?php
 }

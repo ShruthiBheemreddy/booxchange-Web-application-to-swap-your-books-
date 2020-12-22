@@ -1,3 +1,22 @@
+<?php
+session_start();
+$localhost = "localhost";
+$username = "root";
+$password = "";
+$dbname = "booxchange";
+$conn = new mysqli($localhost, $username, $password, $dbname);
+if( $conn->connect_errno){
+    echo "cannot connect to database";
+    exit();
+}
+if(isset($_POST['remove_from_cart'])){
+	$cart =$_GET['name_of_book'];
+	$email=$_SESSION["username"];
+$query="delete from cart where email='".$email."' and books='".$cart."' limit 1";
+mysqli_query($conn, $query);
+
+}
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -7,7 +26,12 @@
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/style.css">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script> 
 	</head>
 	<body>
 		
@@ -35,11 +59,11 @@
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li ><a href="index.php">Home</a></li>
-								<li class="active">
+								<li>
 									<a href="about1.html">About</a>
 								</li>
 								<li><a href="library.php">Library</a></li>
-								<li><a href="account.php">Account</a></li>
+								<li class="active"><a href="account.php">Account</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</div>
@@ -47,11 +71,20 @@
 				</div>
 			</div>
 		</nav>
-		<ul class="unordered">
-  <li class="vertical"><a href="#dashboard">Dashboard</a></li>
-  <li class="vertical"><a href="#news">Orders</a></li>
-  <li class="vertical"><a href="your_library.php">Your_Library</a></li>
-  <form style="margin:0 auto;width:20%;text-align:left" action="addbook1.php" method="post">
+		<ul class="unordered" style="float: left;">
+   <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
+  <li class="vertical"><a href="order.php">Orders</a></li>
+  <li class="vertical"><a href="your_Library.php">Your_Library</a></li>
+  <li class="vertical"><a href="wallet.php">Wallet</a></li>
+  <li class="vertical"><a href="your_library.php">Your_cart</a></li>
+  <li class="vertical"><a href="shop.php">Shop</a></li>
+  <li class="vertical"><a href="profile.php">Profile</a></li>
+  <li class="vertical"><a href="index.php">Logout</a></li>
+</ul>
+<p style="width: 90.2%;
+    margin-left: 20%;
+    border-top: 0;">
+    	<form style="margin:0 auto;width:20%;text-align:left" action="addbook1.php" method="post">
   <b style="color: black;">Fill info of the book</b>
   <input type="text" name="name_of_book"  placeholder="name of Book"  maxlength="50" size="50" style="background-color: powderblue;
   color: black; "><br>
@@ -60,14 +93,11 @@
   <input type="text" name="Language"  placeholder="Language"  maxlength="50" size="50"  required style="background-color: powderblue; "><br>
   <input type="text" name="Pages"  placeholder="Pages"  maxlength="50" size="50" required style="background-color: powderblue; "><br>
   <input type="text" name="genre"  placeholder="Genre"  maxlength="50" size="50" required style="background-color: powderblue;"><br>
-  <button type="submit" value="Submit">Add</button>
+  <input type="text" name="price"  placeholder="price of the book"  maxlength="5" size="50" required style="background-color: powderblue;"><br>
+  <button type="submit" value="Submit" style="margin-left: 50%; color: blue; size:10px">Add</button>
 </form>
-  <li class="vertical"><a href="#about">Wallet</a></li>
-  <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
-  <li class="vertical"><a href="shop.php">Shop</a></li>
-  <li class="vertical"><a href="#about">Profile</a></li>
-  <li class="vertical"><a href="#about">Logout</a></li>
-</ul>
+
+    </p>
 <style type="text/css">
 .vertical{
   display: block;
@@ -82,7 +112,9 @@
 .vertical:hover {
   color: red;
 }
-	</style>
+
+</style>
+</script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
    <!-- popper -->

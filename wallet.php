@@ -1,8 +1,14 @@
 <?php
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+session_start();
+$localhost = "localhost";
+$username = "root";
+$password = "";
+$dbname = "booxchange";
+$conn = new mysqli($localhost, $username, $password, $dbname);
+if( $conn->connect_errno){
+    echo "cannot connect to database";
+    exit();
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -58,27 +64,50 @@ if(!isset($_SESSION))
 				</div>
 			</div>
 		</nav>
-		<ul class="unordered">
+		<ul class="unordered" style="float: left;">
   <li class="vertical"><a href="dashboard.php">Dashboard</a></li>
   <li class="vertical"><a href="order.php">Orders</a></li>
-  <li class="vertical"><a href="your_library.php">Your_Library</a></li>
-  <b style="color: navy;text-align: center;display: block; width:75%;
-height:auto;
-max-height:100%;
-overflow:hidden;
-margin-left:14.5%;
-margin-right:14.5%"><?php
-	$email=$_SESSION["username"];
-	$name=chop($email,"@gmail.com");
-	$_SESSION["total"]=0;
-	echo "Hello $name.<br><br> From your dashboard you can access orders, edit your profile and manage your accounts.<br> You can also shop from our library";
-	?></b>
+  <li class="vertical"><a href="your_Library.php">Your_Library</a></li>
   <li class="vertical"><a href="wallet.php">Wallet</a></li>
-  <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
+  <li class="vertical"><a href="your_library.php">Your_cart</a></li>
   <li class="vertical"><a href="shop.php">Shop</a></li>
   <li class="vertical"><a href="profile.php">Profile</a></li>
-  <li class="vertical"><a href="account.php">Logout</a></li>
+  <li class="vertical"><a href="index.php">Logout</a></li>
 </ul>
+<p style="width: 90.2%;
+    margin-left: 20%;
+    border-top: 0;">
+    	<?php
+$localhost = "localhost";
+$username = "root";
+$password = "";
+$dbname = "booxchange";
+$conn = new mysqli($localhost, $username, $password, $dbname);
+if( $conn->connect_errno){
+    echo "failed";
+    exit();
+}
+$user=$_SESSION["username"];
+$sql="select * from orders where user='".$user."'";
+if($result=$conn->query($sql)){
+	$_SESSION["wallet"]="0";
+        while($row=$result->fetch_assoc())
+        {
+        	$book=$row['books'];
+        	$query="select * from book_price where name='".$book."'";
+        	$res=mysqli_query($conn,$query);
+        	$row1=$res->fetch_assoc();
+
+        	$_SESSION["wallet"]=(int)$_SESSION["wallet"]+(int)$row1['price'];
+        	
+        }}
+?>
+    <form method="post" action="checkout.php">
+    		<b style="margin-left: 20%"> A total of :<?php echo $_SESSION["wallet"];?>  INR Is available in your wallet</b>
+          
+            </form>
+
+    </p>
 <style type="text/css">
 .vertical{
   display: block;
@@ -95,6 +124,7 @@ margin-right:14.5%"><?php
 }
 
 </style>
+</script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
    <!-- popper -->

@@ -48,24 +48,9 @@
 				</div>
 			</div>
 		</nav>
-		<h6 style="width: 40%; margin: auto;">Leave Your Details in the given form. We will contact you soon.</h5>
-		<form action="accountregister.php" method="post">
-  <div class="container">
-    <h1>Contact Form</h1>
-    <hr>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
-
-    <label for="psw"><b>name</b></label>
-    <input type="password" placeholder="Enter Name" name="psw" id="psw" required>
-
-    <label for="psw-repeat"><b>phone</b></label>
-    <input type="password" placeholder="Enter Phone" name="phoneno" id="psw-repeat" required>
-    <hr>
-    <button type="submit" class="registerbtn">Submit</button>
-  </div>
-</form>
+		<h2 style="margin-left: 15%">Reach us at:</h2>
+				<h4 style="width: 40%; margin-left: 25%;color: powderblue;">vishwachand.p@gmail.com</h4>
+			<h4 style="width: 40%; margin-left:25%; color:powderblue;">shruthiapr3@gmail.com</h4>
 <style type="text/css">
 	* {box-sizing: border-box}
 

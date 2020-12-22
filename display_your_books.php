@@ -1,7 +1,15 @@
 <?php
 session_start();
+$localhost = "localhost";
+$username = "root";
+$password = "";
+$dbname = "booxchange";
+$conn = new mysqli($localhost, $username, $password, $dbname);
+if( $conn->connect_errno){
+    echo "cannot connect to database";
+    exit();
+}
 ?>
-<?php?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -11,7 +19,12 @@ session_start();
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	<link rel="stylesheet" href="css/style.css">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script> 
 	</head>
 	<body>
 		
@@ -39,11 +52,11 @@ session_start();
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<li ><a href="index.php">Home</a></li>
-								<li class="active">
+								<li>
 									<a href="about1.html">About</a>
 								</li>
 								<li><a href="library.php">Library</a></li>
-								<li><a href="account.php">Account</a></li>
+								<li class="active"><a href="account.php">Account</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</div>
@@ -51,36 +64,34 @@ session_start();
 				</div>
 			</div>
 		</nav>
-		<ul class="unordered">
+		<ul class="unordered" style="float: left;">
   <li class="vertical"><a href="#dashboard">Dashboard</a></li>
   <li class="vertical"><a href="#news">Orders</a></li>
-  <li class="vertical"><a href="your_library.php">Your_Library</a></li>
-  <?php
-  $db = mysqli_connect('localhost', 'root', '', 'booxchange');
-if( $db->connect_error){
-    echo "failed";
-    die('Error: ' . $con->connect_error);
-}
-$email=$_SESSION["username"];
-$query="select * from searchbook where username='$email'";
-$result=mysqli_query($db, $query) or die("cannot insert");
-if($result){
+  <li class="vertical"><a href="Your_Library.php">Your_Library</a></li>
+  <b style="color: navy;text-align: center;display: block; width:75%;
+height:auto;
+max-height:100%;
+overflow:hidden;
+margin-left:14.5%;
+margin-right:14.5%"></b>
+  <li class="vertical"><a href="#about">Wallet</a></li>
+  <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
+  <li class="vertical"><a href="shop.php">Shop</a></li>
+  <li class="vertical"><a href="#about">Profile</a></li>
+  <li class="vertical"><a href="#about">Logout</a></li>
+</ul>
+<p style="width: 90.2%;
+    margin-left: 20%;
+    border-top: 0;">
+    <h2 style="margin-left: 30%">Books in Your library are :</h2>
+    	<?php
+    	$email=$_SESSION["username"];
+    	$query = "SELECT * FROM searchbook WHERE username = '".$email."'";
+    	$result=mysqli_query($conn, $query) or die("cannot collect data");
+
+    	if(mysqli_num_rows($result)>0){
+    	while($row=$result->fetch_assoc()){
     	?>
-<h3 style="margin-left: 50px; margin-right: 50px;">Some of the books available in your library are</h2>
-        <table style="margin-left: auto; margin-right: auto; background-color: white; border: 2px solid black; padding: 50px solid black; width: 80%;">
-            <tr >
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Name of the Book</th>
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Author of Book</th>
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Publisher of Book  
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Language</th>
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 20%">Pages</th>
-                <th style="border: 1px solid black; padding: 5px; background-color: black; width: 10%">Genre</th>
-            </tr>
-        </table>
-        <?php
-        while($row=$result->fetch_assoc()){
-    	?> 
-    	
     	<table style="margin-left: auto; margin-right: auto; color: cyan; border: 2px solid black; padding: 50px solid black; width: 80%">
             <tr>
                 <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['name_of_book']; ?></td>
@@ -89,18 +100,18 @@ if($result){
                 <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['Language']; ?></td>
                 <td style="border: 1px solid black; padding: 5px; background-color: black; width: 20%"><?php echo $row['Pages']; ?></td>
                 <td style="border: 1px solid black; padding: 5px; background-color: black; width: 10%"><?php echo $row['genre']; ?></td>
+                <td style="border: 1px solid black; padding: 5px; background-color: black; width: 10%"><?php echo $row['price']; ?></td>
             </tr>
         </table>
         <?php
     }
 }
-        ?>
-  <li class="vertical"><a href="#about">Wallet</a></li>
-  <li class="vertical"><a href="your_cart.php">Your_cart</a></li>
-  <li class="vertical"><a href="shop.php">Shop</a></li>
-  <li class="vertical"><a href="#about">Profile</a></li>
-  <li class="vertical"><a href="#about">Logout</a></li>
-</ul>
+else
+{
+	echo "You don't have any books in your library";
+}
+?>
+    </p>
 <style type="text/css">
 .vertical{
   display: block;
@@ -115,7 +126,9 @@ if($result){
 .vertical:hover {
   color: red;
 }
-	</style>
+
+</style>
+</script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
    <!-- popper -->

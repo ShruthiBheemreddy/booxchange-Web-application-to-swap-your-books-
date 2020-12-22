@@ -19,9 +19,15 @@ if( $db->connect_error){
     }
   }
   else{
+    if (filter_var($uname, FILTER_VALIDATE_EMAIL)){
     $query = "INSERT INTO userinfo (email,password) 
           VALUES('$uname','$psw')";
     $result=mysqli_query($db, $query) or die("cannot insert");
     include "accountlogin.php";    
   }
+else{
+  echo '<script>alert("invalid pattern for your email!!. Try with different email or Make sure that both passwords are same ")</script>';
+     include "account.php";
+}}
+
 ?>

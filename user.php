@@ -67,6 +67,8 @@ function userfun($email){?>
 <b style="color: navy;text-align: center;display: block; border: 16px 16px;margin: auto;"><?php
 	$name=chop($email,"@gmail.com"); 
 	$_SESSION["username"]=$name;
+	$_SESSION["total"]="0";
+	echo ""
 	echo $_SESSION["usrname"];
 	echo "hello";
 	echo "Hello $name. From your dashboard you can access orders, edit your profile and manage your accounts.";
